@@ -1,4 +1,5 @@
-import turtle, queue
+import turtle
+import queue
 
 turtle = turtle.Turtle()
 
@@ -17,7 +18,7 @@ def rectangle(x, y):
     turtle.left(90)
 
 
-def getblocks(input):
+def get_blocks(input):
     output = 1
     prev_layer = 1
     for i in range(0):
@@ -26,19 +27,31 @@ def getblocks(input):
     return output
 
 
-blocks = getblocks(input)
+layers = input()
+layers = int(layers) - 1
+if layers == -1:
+    while True:
+        x = 1
 queue_x = queue.Queue()
 queue_y = queue.Queue()
+queue_layer = queue.Queue()
 queue_x.put(0)
 queue_y.put(0)
-for i in range(15):
+queue_layer.put(0)
+while(True):
     x = queue_x.get()
     y = queue_y.get()
+    layer = queue_layer.get()
     rectangle(x, y)
-    queue_x.put(x - 50)
-    queue_y.put(y - 50)
-    queue_x.put(x + 50)
-    queue_y.put(y - 50)
 
-while(True):
-    x = x
+    if layer < layers:
+        queue_x.put(x - 50)
+        queue_y.put(y - 50)
+        queue_layer.put(layer + 1)
+
+        queue_x.put(x + 50)
+        queue_y.put(y - 50)
+        queue_layer.put(layer + 1)
+
+while True:
+    x = 1
